@@ -1,5 +1,7 @@
 package com.knubisoft.base.bool;
 
+import lombok.Value;
+
 public class BoolTasksImpl implements BoolTasks {
 
     @Override
@@ -9,6 +11,7 @@ public class BoolTasksImpl implements BoolTasks {
 
     @Override
     public Boolean isFalseAutobox(boolean value) {
+
         return null;
     }
 

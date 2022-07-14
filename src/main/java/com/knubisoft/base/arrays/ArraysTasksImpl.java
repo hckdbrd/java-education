@@ -89,22 +89,81 @@ public class ArraysTasksImpl implements ArraysTasks {
 
     @Override
     public int sumOfAllUniqueElements(int[] array) {
-        return -1;
+        return 0;
     }
 
     @Override
     public int[] moveZeroes(int[] array) {
-        return null;
+
+        int currentElement;
+        int previousElement;
+
+        for (int i = 0; array.length > i; i++) {
+            if (array[i] != 0 && i != 0) {
+                currentElement = array[i];
+                previousElement = array[i-1];
+                while ( i > 0 ) {
+                    if (array[i-1] == 0) {
+                        array[i-1] = currentElement;
+                        array[i] = previousElement;
+                        i--;
+                    } else {
+                        break;
+                    }
+                }
+            }
+        }
+        return array;
     }
 
     @Override
     public int findFinalValue(int[] nums, int original) {
-        return -1;
+        int finalValue;
+
+        for (int i = 0; nums.length > i;) {
+            if (nums[i] == original) {
+                original *= 2;
+                i = 0;
+            } else {
+                i++;
+            }
+        }
+        finalValue = original;
+
+        return finalValue;
     }
 
     @Override
     public String longestCommonPrefix(String[] words) {
-        return null;
+
+        if (words.length == 0) {
+            return "";
+        }
+
+        String prefixBuilder = "";
+        String basePrefix = words[0];
+
+        for (String word: words) {
+            if ( word.length() < basePrefix.length() ) {
+                basePrefix = word;
+            }
+        }
+
+        outer:
+        for (int i = 0; i < basePrefix.length(); i++) {
+
+            for (String word : words) {
+
+                char baseChar = basePrefix.charAt(i);
+                char switchChar = word.charAt(i);
+
+                if (baseChar != switchChar) break outer;
+            }
+            prefixBuilder += basePrefix.charAt(i);
+        }
+
+        System.out.println(prefixBuilder);
+        return prefixBuilder;
     }
 
     @Override
@@ -114,6 +173,21 @@ public class ArraysTasksImpl implements ArraysTasks {
 
     @Override
     public boolean containsDuplicate(int[] array) {
-        return false;
+
+        boolean isDuplicate = false;
+
+        for (int i = 0; i < array.length; i++) {
+
+            int uniqueElement = array[i];
+
+            for (int j = 0; j < array.length; j++) {
+                if (uniqueElement == array[j] && i != j) {
+                    isDuplicate = true;
+                    break;
+                }
+            }
+        }
+
+        return isDuplicate;
     }
 }

@@ -1,5 +1,7 @@
 package com.knubisoft.base.arrays;
 
+import java.util.ArrayList;
+
 public class ArraysTasksImpl implements ArraysTasks {
 
     @Override
@@ -89,7 +91,23 @@ public class ArraysTasksImpl implements ArraysTasks {
 
     @Override
     public int sumOfAllUniqueElements(int[] array) {
-        return 0;
+
+        int sum = 0, counter = 0;
+        ArrayList<Integer> duplicates = new ArrayList<Integer>();
+
+        for (int element : array) {
+            if (!duplicates.contains(element)) sum += element;
+            for (int switchElement: array) {
+                if (element == switchElement) counter++;
+                if (counter > 1) {
+                    duplicates.add(element);
+                    counter = 0;
+                    break;
+                }
+            }
+        }
+
+        return sum;
     }
 
     @Override
@@ -168,7 +186,27 @@ public class ArraysTasksImpl implements ArraysTasks {
 
     @Override
     public int missingNumber(int[] array) {
-        return -1;
+        boolean present = false;
+
+        int missingNum = 0;
+        int max = array.length+1;
+
+        int[] sequence = new int[max];
+        for(int min = 0; min < max; min++) {
+            sequence[min] = min;
+        }
+
+        outer:
+        for(int elementSequence: sequence) {
+            for (int elementArray: array) {
+                if (elementSequence == elementArray) {
+                    continue outer;
+                }
+            }
+
+            missingNum = elementSequence;
+        }
+        return missingNum;
     }
 
     @Override

@@ -11,7 +11,7 @@ class NumbersTasksTest {
     NumbersTasks numbersTasks = new NumbersTasksImpl();
 
     @Test
-    void isUglyNumber() {
+    void isUglyInt() {
         assertFalse(numbersTasks.isUglyInt(235));
         assertTrue(numbersTasks.isUglyInt(4));
         assertFalse(numbersTasks.isUglyInt(14));
@@ -58,7 +58,7 @@ class NumbersTasksTest {
         assertTrue(numbersTasks.isPrime(17));
         assertFalse(numbersTasks.isPrime(45250));
         assertTrue(numbersTasks.isPrime(Integer.MAX_VALUE));
-        assertFalse(numbersTasks.isPrime(11111));
+        assertTrue(numbersTasks.isPrime(11111));
         assertTrue(numbersTasks.isPrime(6857));
         assertFalse(numbersTasks.isPrime(543));
         assertTrue(numbersTasks.isPrime(47));

@@ -151,8 +151,8 @@ public class StringTasksTest {
     @Test
     public void toCamelCaseSuccessful() {
         assertEquals("theStealthWarrior", instance.toCamelCase("the-stealth-warrior"));
-        assertEquals("theStealthWarrior", instance.toCamelCase("The_Stealth_Warrior"));
-        assertEquals("theStealthWarrior", instance.toCamelCase("The stealth warrior"));
+        assertEquals("TheStealthWarrior", instance.toCamelCase("The_Stealth_Warrior"));
+        assertEquals("TheStealthWarrior", instance.toCamelCase("The stealth warrior"));
     }
 
     @Test
@@ -176,8 +176,8 @@ public class StringTasksTest {
 
     @Test
     public void sortStringCharactersAscSuccessful() {
-        assertEquals(" HWdellloor", instance.sortStringCharactersAsc("Hello World"));
-        assertEquals("Jhno", instance.sortStringCharactersAsc("John"));
+        assertEquals("deHllloorW", instance.sortStringCharactersAsc("Hello World"));
+        assertEquals("hJno", instance.sortStringCharactersAsc("John"));
         assertEquals("", instance.sortStringCharactersAsc(""));
     }
 

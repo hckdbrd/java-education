@@ -172,6 +172,7 @@ public class PatternTasksTest {
         assertTrue(instance.isMathematicalExpression("10 + 20"));
         assertFalse(instance.isMathematicalExpression("100 +"));
         assertFalse(instance.isMathematicalExpression("10 *+ 20 * 30"));
+
     }
 
     @Test

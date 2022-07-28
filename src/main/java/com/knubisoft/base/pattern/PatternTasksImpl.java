@@ -1,5 +1,6 @@
 package com.knubisoft.base.pattern;
 
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -60,7 +61,26 @@ public class PatternTasksImpl implements PatternTasks {
 
     @Override
     public String divideDigit(int digit) {
-        return null;
+        String digitString = Integer.valueOf(digit).toString();
+        char[] digitStringArray = digitString.toCharArray();
+        int lastIndexOfDigitStringArray = digitStringArray.length-1;
+        char[] reversedDigitStringArray = new char[digitStringArray.length];
+
+        for (int i = 0; i < digitStringArray.length ; i++) {
+            reversedDigitStringArray[i] = digitStringArray[lastIndexOfDigitStringArray-i];
+        }
+
+        String reversedDigitString = String.valueOf(reversedDigitStringArray).replaceAll("0{3}","000#");
+
+        digitStringArray = reversedDigitString.toCharArray();
+        lastIndexOfDigitStringArray = digitStringArray.length-1;
+        reversedDigitStringArray = new char[digitStringArray.length];
+
+        for (int i = 0; i < digitStringArray.length ; i++) {
+            reversedDigitStringArray[i] = digitStringArray[lastIndexOfDigitStringArray-i];
+        }
+
+        return String.valueOf(reversedDigitStringArray);
     }
 
     @Override
@@ -77,16 +97,28 @@ public class PatternTasksImpl implements PatternTasks {
 
     @Override
     public String getLastVowelsByConstraint(String text, int n) {
-        return null;
+        if (
+                ( text == null || text.equals("") || text.equals(" ") )
+                        ||
+                        ( n < 1 )
+        ) throw new IllegalArgumentException();
+        text = text.replaceAll("[^euioa]+", "");
+
+        int startIndex = text.length() - n;
+
+        return text.substring(startIndex);
     }
 
     @Override
     public boolean isMathematicalExpression(String text) {
-        return false;
+        if ( text == null || text.equals("") || text.equals(" ") ) throw new IllegalArgumentException();
+        int textLength = text.length();
+        return text.matches(String.format("\\d{%d}|(^\\s?\\d+\\s*(\\s*[-+*/]\\s*\\d+\\s*)+)", textLength));
     }
 
     @Override
     public String insertDash(String text) {
-        return null;
+        if (text == null || text.equals("") || text.equals(" ")) throw new IllegalArgumentException();
+        return text.replaceAll("([A-Z])","$1-");
     }
 }

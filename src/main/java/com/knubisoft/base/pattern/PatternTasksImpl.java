@@ -60,6 +60,7 @@ public class PatternTasksImpl implements PatternTasks {
     }
 
     @Override
+    //1-st case of solution
     public String divideDigit(int digit) {
         String digitString = Integer.valueOf(digit).toString();
         char[] digitStringArray = digitString.toCharArray();
@@ -81,6 +82,15 @@ public class PatternTasksImpl implements PatternTasks {
         }
 
         return String.valueOf(reversedDigitStringArray);
+
+//        2-nd case of solution. (Dmytro's Petrushenko idea and realization.)
+//        String stringDigit = String.valueOf(digit);
+//
+//        for (int i = 0; i < stringDigit.length() / 3; i++) {
+//            stringDigit = stringDigit.replaceAll("(0{3})\\b", "#$1");
+//        }
+//
+//        return stringDigit;
     }
 
     @Override

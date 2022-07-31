@@ -2,8 +2,11 @@ package com.knubisoft.base.bool;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BoolTasksTest {
 
@@ -79,6 +82,24 @@ public class BoolTasksTest {
         assertFalse(instance.orFunction(0, ""));
         assertFalse(instance.orFunction(0, " "));
         assertFalse(instance.orFunction(10, null));
+
+    }
+
+    @Test
+    public void andComplexFunctionSuccessful() {
+        assertTrue(instance.andComplexFunction(4,4.0, 5));
+        assertTrue(instance.andComplexFunction(4,4.4, 5));
+        assertFalse(instance.andComplexFunction(4,4.5, 5));
+        assertFalse(instance.andComplexFunction(1,2.2, 3));
+        assertTrue(instance.andComplexFunction(1,1.4, 3));
+        assertFalse(instance.andComplexFunction(2,2.5, 3));
+    }
+
+    @Test
+    public void orComplexFunctionSuccessful() {
+        assertTrue(instance.orComplexFunction(5,5.3, 5.5, 6));
+        assertTrue(instance.orComplexFunction(5,5.5, 5.3, 6));
+        assertFalse(instance.orComplexFunction(5,5.5, 5.5, 6));
     }
 
     @Test

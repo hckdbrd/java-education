@@ -20,7 +20,7 @@ public interface BoolTasks {
      * Autobox your param and return it only if param is false;
      * @param value - primitive value.
      * */
-    Boolean isFalseUnbox(boolean value);
+    boolean isFalseUnbox(Boolean value);
     /**
      * You have to compare two parameters. Convert the second to digit if it possible.
      * You can use only '&&' operator;
@@ -70,7 +70,7 @@ public interface BoolTasks {
      * @param generatedThirdDigit - a random number in specified range.
      * @param range - a range that can be 5 or 7.
      */
-    boolean orComplexFunction(int generatedFirstDigit, double generatedSecondDigit, int generatedThirdDigit, int range);
+    boolean orComplexFunction(int generatedFirstDigit, double generatedSecondDigit, double generatedThirdDigit, int range);
     /**
      * Convert params to string type and put the checker on them size.
      * Example 1:
@@ -107,4 +107,5 @@ public interface BoolTasks {
      * @param maxLength - the constraint for a username and a name;
      * */
     boolean isSameCharactersCount(String username, String name, int maxLength);
+
 }

@@ -1,6 +1,6 @@
 package com.knubisoft.base.queue.car;
 
-public class Car implements Comparable<Car>{
+public class Car {
 
     private final String brand;
     private final double price;
@@ -18,8 +18,4 @@ public class Car implements Comparable<Car>{
         return price;
     }
 
-    @Override
-    public int compareTo(Car o) {
-        return Double.compare(this.getPrice(), o.getPrice());
-    }
 }

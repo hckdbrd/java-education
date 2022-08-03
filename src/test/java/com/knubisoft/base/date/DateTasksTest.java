@@ -2,6 +2,8 @@ package com.knubisoft.base.date;
 
 import org.junit.jupiter.api.Test;
 
+import java.text.ParseException;
+
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -10,7 +12,7 @@ class DateTasksTest {
     DateTasks dateTasks = new DateTasksImpl();
 
     @Test
-    void add1Day() {
+    void add1Day() throws ParseException {
         assertEquals("2022-01-28",dateTasks.add1Day("2022-01-27"));
         assertEquals("1993-01-01",dateTasks.add1Day("1992-12-31"));
         assertEquals("2012-02-29",dateTasks.add1Day("2012-02-28"));
@@ -20,7 +22,7 @@ class DateTasksTest {
     }
 
     @Test
-    void getMonthFromDate() {
+    void getMonthFromDate() throws ParseException {
         assertEquals(11, dateTasks.getMonthFromDate("Mon, 26 Nov 2018"));
         assertEquals(5, dateTasks.getMonthFromDate("Tue, 06 May 1980"));
         assertEquals(1, dateTasks.getMonthFromDate("Wed, 03 Jan 2018"));
@@ -31,7 +33,7 @@ class DateTasksTest {
     }
 
     @Test
-    void findBiggestDate() {
+    void findBiggestDate() throws ParseException {
         assertEquals("2022-05-17 18:42:51",
                 dateTasks.findBiggestDate("2015-01-22 10:15:55", "2022-05-17 18:42:51", "2022-02-19 18:42:51"));
         assertEquals("2022-05-17 18:42:53",
@@ -47,7 +49,7 @@ class DateTasksTest {
     }
 
     @Test
-    void getLastDayOfTheMonth() {
+    void getLastDayOfTheMonth() throws ParseException {
         assertEquals("2000-03-31", dateTasks.getLastDayOfTheMonth("2000-03-15"));
         assertEquals("2020-02-29", dateTasks.getLastDayOfTheMonth("2020-02-07"));
         assertEquals("1920-11-30", dateTasks.getLastDayOfTheMonth("1920-11-29"));
@@ -56,7 +58,7 @@ class DateTasksTest {
     }
 
     @Test
-    void sumTimes() {
+    void sumTimes() throws ParseException {
         assertEquals("10:30:00", dateTasks.sumTimes("07:00:00", "03:30:00"));
         assertEquals("00:00:00", dateTasks.sumTimes("23:59:59", "00:00:01"));
         assertEquals("12:56:57", dateTasks.sumTimes("10:55:45", "02:01:12"));
@@ -65,7 +67,7 @@ class DateTasksTest {
     }
 
     @Test
-    void getDateAfter2Weeks() {
+    void getDateAfter2Weeks() throws ParseException {
         assertEquals("2012-02-04", dateTasks.getDateAfter2Weeks("2012-01-21"));
         assertEquals("2020-03-13", dateTasks.getDateAfter2Weeks("2020-02-28"));
         assertEquals("1922-10-01", dateTasks.getDateAfter2Weeks("1922-09-17"));
@@ -75,7 +77,7 @@ class DateTasksTest {
     }
 
     @Test
-    void getNumberOfDaysBetweenTwoDates() {
+    void getNumberOfDaysBetweenTwoDates() throws ParseException {
         assertEquals(3652, dateTasks.getNumberOfDaysBetweenTwoDates("2012-09-21","2022-09-21"));
         assertEquals(0, dateTasks.getNumberOfDaysBetweenTwoDates("2022-09-21","2022-09-21"));
         assertEquals(38, dateTasks.getNumberOfDaysBetweenTwoDates("2021-11-23","2021-12-31"));
@@ -85,7 +87,7 @@ class DateTasksTest {
     }
 
     @Test
-    void getTheNextAndPreviousFriday() {
+    void getTheNextAndPreviousFriday() throws ParseException {
         assertArrayEquals(new String[] {"2021-07-23", "2021-07-30"}, dateTasks.getTheNextAndPreviousFriday("2021-07-27"));
         assertArrayEquals(new String[] {"2015-11-06", "2015-11-20"}, dateTasks.getTheNextAndPreviousFriday("2015-11-13"));
         assertArrayEquals(new String[] {"2017-10-27", "2017-11-03"}, dateTasks.getTheNextAndPreviousFriday("2017-11-01"));
@@ -95,7 +97,7 @@ class DateTasksTest {
     }
 
     @Test
-    void getNumberOfMonthsRemainingInTheYear() {
+    void getNumberOfMonthsRemainingInTheYear() throws ParseException {
         assertEquals(11, dateTasks.getNumberOfMonthsRemainingInTheYear("2012-01-22"));
         assertEquals(0, dateTasks.getNumberOfMonthsRemainingInTheYear("1999-12-31"));
         assertEquals(3, dateTasks.getNumberOfMonthsRemainingInTheYear("2015-09-11"));

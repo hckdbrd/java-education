@@ -1,5 +1,7 @@
 package com.knubisoft.base.date;
 
+import java.text.ParseException;
+
 public interface DateTasks {
 
     /**
@@ -14,7 +16,7 @@ public interface DateTasks {
      * @param date Random date in string format.
      * @return Modified date in string format.
      */
-    String add1Day(String date);
+    String add1Day(String date) throws ParseException;
 
     /**
      * Given an input string containing random date in [day of week, date month year] format, your task is to parse the input
@@ -28,7 +30,7 @@ public interface DateTasks {
      * @param date Random date in string format.
      * @return Number of month.
      */
-    int getMonthFromDate(String date);
+    int getMonthFromDate(String date) throws ParseException;
 
     /**
      * Given 3 input strings containing different random dates in the format [year-month-day hours:minutes:seconds],
@@ -45,7 +47,7 @@ public interface DateTasks {
      * @param date3 Third random date in string format.
      * @return Biggest date.
      */
-    String findBiggestDate(String date1, String date2, String date3);
+    String findBiggestDate(String date1, String date2, String date3) throws ParseException;
 
     /**
      * Given an input string containing random date in [year-month-day] format, your task is to parse the input
@@ -60,7 +62,7 @@ public interface DateTasks {
      * @param date Random date in string format
      * @return The last day of the month.
      */
-    String getLastDayOfTheMonth(String date);
+    String getLastDayOfTheMonth(String date) throws ParseException;
 
     /**
      * Given 2 input strings containing different random times in the format [hours:minutes:seconds], your task is to parse
@@ -81,7 +83,7 @@ public interface DateTasks {
      * @param time2 Second random time in string format.
      * @return Sum result.
      */
-    String sumTimes(String time1, String time2);
+    String sumTimes(String time1, String time2) throws ParseException;
 
     /**
      * Given an input string containing random date in [year-month-day] format, your task is to parse the input string
@@ -95,7 +97,7 @@ public interface DateTasks {
      * @param date Random date in string format.
      * @return Date after 2 weeks.
      */
-    String getDateAfter2Weeks(String date);
+    String getDateAfter2Weeks(String date) throws ParseException;
 
     /**
      * Given 2 input strings containing different random dates in the format [year-month-day], your task is to parse
@@ -120,7 +122,7 @@ public interface DateTasks {
      * @param date2 Second random date in string format.
      * @return
      */
-    long getNumberOfDaysBetweenTwoDates(String date1, String date2);
+    long getNumberOfDaysBetweenTwoDates(String date1, String date2) throws ParseException;
 
     /**
      * Given an input string containing random date in [year-month-day] format, your task is to parse the input string
@@ -133,7 +135,7 @@ public interface DateTasks {
      * Example 1:
      *
      *     input: "2021-07-27"
-     *     output: ["2021-07-23", "2021-07-30"]
+     *     output: ["2021-07-23", "2021-07-30"]2
      *
      * Example 2:
      *
@@ -148,7 +150,7 @@ public interface DateTasks {
      * @param date Random date in string format.
      * @return Array that contain previous and next friday dates based on input random date.
      */
-    String[] getTheNextAndPreviousFriday(String date);
+    String[] getTheNextAndPreviousFriday(String date) throws ParseException;
 
     /**
      * Given an input string containing random date in [year-month-day] format, your task is to parse the input string
@@ -167,5 +169,5 @@ public interface DateTasks {
      * @param date Random date in string format.
      * @return Number of months remaining in the year.
      */
-    int getNumberOfMonthsRemainingInTheYear(String date);
+    int getNumberOfMonthsRemainingInTheYear(String date) throws ParseException;
 }

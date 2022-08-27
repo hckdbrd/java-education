@@ -1,5 +1,6 @@
 package com.knubisoft.base.reflection;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 
@@ -20,7 +21,7 @@ public interface ReflectionTasks {
      * You can scan only in range of package: com.knubisoft.base.reflection.model.
      * @param cls - your instance.
      * */
-    Object createNewInstanceForClass(Class<?> cls);
+    Object createNewInstanceForClass(Class<?> cls) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException;
     /**
      * Write a java program to scan the current interface (ReflectionTasks.java) and find all implementation for it.
      * @param cls - class which will be scanned.
@@ -53,7 +54,7 @@ public interface ReflectionTasks {
      * @param cls - class which will be scanned.
      * @param name - name of the method.
      * */
-    Object evaluateMethodByName(Class<?> cls, String name);
+    Object evaluateMethodByName(Class<?> cls, String name) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException;
     /**
      * You have to evaluate the method of class by the name and put to there args.
      * You need to return a value which will be returned from a found method.

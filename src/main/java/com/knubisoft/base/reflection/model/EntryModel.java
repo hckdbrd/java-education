@@ -21,9 +21,14 @@ public abstract class EntryModel {
         this.version = version;
     }
 
+    public EntryModel() {
+
+    }
+
     public EntryModel builder() {
         return this;
     }
+
 
     private String getUser() {
         return "";

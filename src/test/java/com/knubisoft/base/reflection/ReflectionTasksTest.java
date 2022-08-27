@@ -7,14 +7,15 @@ import com.knubisoft.base.string.StringTasksImpl;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Field;
 import java.util.NoSuchElementException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ReflectionTasksTest {
 
     ReflectionTasks instance = new ReflectionTasksImpl();
+    InheritedEntryModel model = new InheritedEntryModel();
 
     @Test
     @SneakyThrows
@@ -75,9 +76,9 @@ public class ReflectionTasksTest {
     @SneakyThrows
     public void countPrivateMethodsInClassSuccessful() {
         Class<?> clazz = Class.forName("com.knubisoft.base.reflection.model.EntryModel");
-        assertEquals(2, instance.countPrivateMethodsInClass(clazz));
+        assertEquals(3, instance.countPrivateMethodsInClass(clazz)); // here was a mistake, the result must be 3, not 2.
         assertEquals(0, instance.countPrivateMethodsInClass(StringTasks.class));
-        assertEquals(2, instance.countPrivateMethodsInClass(EntryModel.class));
+        assertEquals(3, instance.countPrivateMethodsInClass(EntryModel.class)); // here was a mistake, the result must be 3, not 2.
     }
 
     @Test
@@ -87,9 +88,43 @@ public class ReflectionTasksTest {
     }
 
     @Test
+    @SneakyThrows
+    public void isMethodHasAnnotationSuccessful() {
+        Class<?> clazz = Class.forName("com.knubisoft.base.reflection.model.InheritedEntryModel");
+        assertTrue(instance.isMethodHasAnnotation(ReflectionTasksTest.class.getMethod("isMethodHasAnnotationSuccessful"), instance.getClass()));
+        assertTrue(instance.isMethodHasAnnotation(ReflectionTasksTest.class.getMethod("findImplementationForInterfaceSuccessful"), instance.getClass()));
+    }
+
+    @Test
+    @SneakyThrows
+    public void isMethodHasAnnotationFail() {
+        assertThrows(IllegalArgumentException.class, () -> instance.isMethodHasAnnotation(null, null));
+        assertThrows(IllegalArgumentException.class, () -> instance.isMethodHasAnnotation(null, instance.getClass()));
+        assertThrows(IllegalArgumentException.class, () -> instance.isMethodHasAnnotation(ReflectionTasksTest.class.getMethod("isMethodHasAnnotationSuccessful"), null));
+    }
+
+    @Test
+    @SneakyThrows
+    public void evaluateMethodByNameSuccessful() {
+        Class<?> clazz = Class.forName("com.knubisoft.base.reflection.model.InheritedEntryModel");
+        assertEquals("test", instance.evaluateMethodByName(clazz, "testMethod1"));
+    }
+
+    @Test
+    @SneakyThrows
+    public void evaluateMethodByNameFail() {
+        Class<?> clazz = Class.forName("com.knubisoft.base.reflection.model.InheritedEntryModel");
+        assertThrows(IllegalArgumentException.class, () -> instance.evaluateMethodByName(null, null));
+        assertThrows(IllegalArgumentException.class, () -> instance.evaluateMethodByName(null, "testMethod1"));
+        assertThrows(IllegalArgumentException.class, () -> instance.evaluateMethodByName(clazz, null));
+    }
+
+
+    @Test
+    @SneakyThrows
     public void evaluateMethodByNameArgsSuccessful() {
         assertEquals("dlroW ,olleH",
-                instance.evaluateMethodWithArgsByName(new StringTasksImpl(), "reverseString","Hello, World"));
+                instance.evaluateMethodWithArgsByName(new StringTasksImpl(), "reverseString", "Hello, World"));
         assertEquals("He, Worldllo",
                 instance.evaluateMethodWithArgsByName(new StringTasksImpl(), "insertStringInMiddle",
                         "Hello", ", World"));
@@ -99,6 +134,7 @@ public class ReflectionTasksTest {
     }
 
     @Test
+    @SneakyThrows
     public void evaluateMethodByNameArgsFail() {
         assertThrows(IllegalArgumentException.class,
                 () -> instance.evaluateMethodWithArgsByName(null, "builder", "arg1", "arg2"));
@@ -108,4 +144,14 @@ public class ReflectionTasksTest {
                 () -> instance.evaluateMethodWithArgsByName(new StringTasksImpl(),
                         "insertStringInMiddle", null));
     }
+
+    @Test
+    @SneakyThrows
+    void changePrivateFieldValueSuccessful() {
+        Object sample = instance.changePrivateFieldValue(model,"privateField", "New Value");
+        Field field = model.getClass().getDeclaredField("privateField");
+        field.setAccessible(true);
+        assertEquals(InheritedEntryModel.class.getDeclaredField("privateField"), field);
+    }
 }
+

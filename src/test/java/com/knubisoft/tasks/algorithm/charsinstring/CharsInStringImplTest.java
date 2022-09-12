@@ -29,7 +29,7 @@ class CharsInStringImplTest {
         StringBuilder b = new StringBuilder();
         for (int index = 0; index < 50; index++) {
             char randomChar = setOfCharacters.charAt(random.nextInt(setOfCharacters.length()));
-
+            if (String.valueOf(randomChar).equals(" ")) continue;
             if (expected.containsKey(randomChar)){
                 Integer v = expected.get(randomChar);
                 expected.put(randomChar, v + 1);

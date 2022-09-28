@@ -3,18 +3,30 @@ package com.knubisoft.tasks.algorithm.luckyticket;
 import java.util.Arrays;
 
 public class LuckyTicketImpl implements LuckyTicket {
-    @Override
-    public boolean checkIsLuckyTicket(String ticket) {
-        if (ticket == null || !ticket.matches("\\d{6,8}")) return false;
 
-        char[] array = ticket.toCharArray();
-        int lastIndex = array.length-1;
+   @Override
+   public boolean checkIsLuckyTicket(String ticket) {
 
-        char[] reversedArray = new char[array.length];
-        for (int i = 0; i <= lastIndex; i++) {
-            reversedArray[i] = array[lastIndex-i];
-        }
+      if (ticket == null) {
+         throw new NullPointerException();
+      }
 
-        return Arrays.equals(array,reversedArray);
-    }
+      if (!ticket.matches("\\b\\d+\\b")) {
+         throw new IllegalArgumentException("Ticket number must be ONLY NUMERIC. Yours - " + ticket);
+      }
+
+      if (!ticket.matches(".{6,8}")) {
+         throw new IllegalArgumentException("Ticket number must have length 6-8. Yours - " + ticket.length());
+      }
+
+      int lastIndex = ticket.length() - 1;
+      char[] array = ticket.toCharArray();
+      char[] reversedArray = new char[array.length];
+
+      for (int i = 0; i <= lastIndex; i++) {
+         reversedArray[i] = array[lastIndex - i];
+      }
+
+      return Arrays.equals(array, reversedArray);
+   }
 }

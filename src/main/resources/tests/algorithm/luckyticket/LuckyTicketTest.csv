@@ -1,0 +1,9 @@
+input,expected
+123432,false
+555455,false
+123321,true
+123321,true
+1234321,true
+2345432,true
+23455432,true
+0000000,true

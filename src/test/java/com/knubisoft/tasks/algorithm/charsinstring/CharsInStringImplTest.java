@@ -36,7 +36,6 @@ class CharsInStringImplTest {
             } else {
                 expected.put(randomChar, 1);
             }
-
             b.append(randomChar);
         }
         return Pair.of(b.toString(), expected);

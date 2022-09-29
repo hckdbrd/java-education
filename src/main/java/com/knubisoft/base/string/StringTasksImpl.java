@@ -29,7 +29,7 @@ public class StringTasksImpl implements StringTasks {
         if ( original == null || original.isEmpty() ) throw new IllegalArgumentException();
         if ( toInsert == null || toInsert.isEmpty() ) throw new IllegalArgumentException();
 
-        int middleIndex = original.length() / 2;
+        int middleIndex = (original.length() / 2)+1;
         StringBuilder updatedString = new StringBuilder(original).insert(middleIndex, toInsert);
 
         return updatedString.toString();
@@ -41,7 +41,7 @@ public class StringTasksImpl implements StringTasks {
         if ( original == null || original.isEmpty() ) throw new IllegalArgumentException();
         if ( position >= original.length() || position < 0 ) throw new IllegalArgumentException();
 
-        StringBuilder updatedString = new StringBuilder(original).insert( position-1, toInsert);
+        StringBuilder updatedString = new StringBuilder(original).insert(position, toInsert);
         return updatedString.toString();
     }
 

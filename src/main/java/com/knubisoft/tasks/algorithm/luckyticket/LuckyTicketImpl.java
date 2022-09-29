@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class LuckyTicketImpl implements LuckyTicket {
 
    @Override
-   public boolean checkIsLuckyTicket(String ticket) {
+   public String checkIsLuckyTicket(String ticket) {
 
       if (ticket == null) {
          throw new NullPointerException();
@@ -27,6 +27,6 @@ public class LuckyTicketImpl implements LuckyTicket {
          reversedArray[i] = array[lastIndex - i];
       }
 
-      return Arrays.equals(array, reversedArray);
+      return String.valueOf(reversedArray);
    }
 }

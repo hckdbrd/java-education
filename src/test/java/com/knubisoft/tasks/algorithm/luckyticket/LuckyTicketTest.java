@@ -25,6 +25,6 @@ class LuckyTicketTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/tests/algorithm/luckyticket/LuckyTicketTest.csv", numLinesToSkip = 1)
     public void luckyTicketsTest(String input, String expected) {
-        assertEquals(Boolean.valueOf(expected), instance.checkIsLuckyTicket(input));
+        assertEquals(expected, instance.checkIsLuckyTicket(input));
     }
 }

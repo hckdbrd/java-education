@@ -14,7 +14,7 @@ class SortImplTest {
     private final Sort sort = new SortImpl();
 
     @Test
-    void sortKeysAndValues() {
+    public void sortKeysAndValues() {
         Map<Integer, List<Integer>> map = new HashMap<>();
         map.put(1, Arrays.asList(5, 4, 3, 2, 1));
         map.put(2, Arrays.asList(5, 4, 3, 1, 2));

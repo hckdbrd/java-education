@@ -1,11 +1,8 @@
 package com.knubisoft.tasks.algorithm.luckyticket;
-
-import java.util.Arrays;
-
 public class LuckyTicketImpl implements LuckyTicket {
 
    @Override
-   public String checkIsLuckyTicket(String ticket) {
+   public boolean checkIsLuckyTicket(String ticket) {
 
       if (ticket == null) {
          throw new NullPointerException();
@@ -20,13 +17,13 @@ public class LuckyTicketImpl implements LuckyTicket {
       }
 
       int lastIndex = ticket.length() - 1;
-      char[] array = ticket.toCharArray();
-      char[] reversedArray = new char[array.length];
+      char[] input = ticket.toCharArray();
+      char[] palindrome = new char[input.length];
 
       for (int i = 0; i <= lastIndex; i++) {
-         reversedArray[i] = array[lastIndex - i];
+         palindrome[i] = input[lastIndex - i];
       }
 
-      return String.valueOf(reversedArray);
+      return String.valueOf(palindrome).equals(ticket);
    }
 }

@@ -23,6 +23,6 @@ public interface LuckyTicket {
      * abaaba
      *
      */
-    String checkIsLuckyTicket(String ticket);
+    boolean checkIsLuckyTicket(String ticket);
 
 }

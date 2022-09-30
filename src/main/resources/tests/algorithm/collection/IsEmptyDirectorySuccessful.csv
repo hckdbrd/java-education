@@ -1,0 +1,3 @@
+expected, directoryPath
+true,src/main/resources/tests/algorithm/collection/isemptydirectory/empty
+false,src/main/resources/tests/algorithm/collection/isemptydirectory/notempty

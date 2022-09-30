@@ -58,7 +58,6 @@ public interface Files {
      */
     void copyDirectoryToDirectory(final File sourceDir, final File destinationDir) throws IOException;
 
-
     /**
      * Gets the contents at the given URL.
      *
@@ -97,8 +96,6 @@ public interface Files {
      * @since 2.4
      */
     byte[] toByteArray(final URL url) throws IOException;
-
-
 
     /**
      * Normalizes a path, removing double and single dot path steps.
@@ -142,9 +139,8 @@ public interface Files {
      */
     String normalize(final String fileName);
 
-
     /**
-     * Reads the contents of a file line by line to a List of Strings.
+     * Read the contents of a file line by line to a List of Strings.
      * The file is always closed.
      *
      * @param file     the file to read, must not be {@code null}
@@ -156,7 +152,6 @@ public interface Files {
      * @throws IOException if an I/O error occurs.
      */
     List<String> readLines(final File file, final Charset charset) throws IOException;
-
 
     /**
      * Tests whether the directory is empty.

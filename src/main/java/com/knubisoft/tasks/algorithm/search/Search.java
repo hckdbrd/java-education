@@ -7,7 +7,7 @@ public interface Search {
      *
      * @param array input data
      * @param v value to search
-     * @return -1 if not found, otherwise position of element
+     * @return -1 if not found, otherwise position of the element
      */
     int binarySearch(long[] array, long v);
 

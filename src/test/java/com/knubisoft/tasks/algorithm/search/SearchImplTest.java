@@ -1,4 +1,4 @@
-package com.knubisoft.tasks.search;
+package com.knubisoft.tasks.algorithm.search;
 
 import com.knubisoft.tasks.algorithm.search.Search;
 import com.knubisoft.tasks.algorithm.search.SearchImpl;

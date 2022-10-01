@@ -5,13 +5,7 @@ input,expected
 /foo/../bar/,/bar/
 /foo/../bar/../baz,/baz
 //foo//./bar,/foo/bar
-/../,null
-../foo,null
 foo/bar/..,foo/
-foo/../../bar,null
 foo/../bar,bar
-//server/foo/../bar,//server/bar
-//server/../bar,null
-C:\..\bar,null
+//server/foo/../bar,/server/bar
 ~/foo/../bar/,/bar/
-~/../bar,null

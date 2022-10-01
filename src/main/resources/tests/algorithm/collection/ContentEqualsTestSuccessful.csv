@@ -1,4 +1,0 @@
-expected, filePath1, filePath2
-true,/tests/algorithm/collection/contentequals/1.txt,tests/algorithm/collection/contentequals/2.txt
-false,/tests/algorithm/collection/contentequals/1.txt,tests/algorithm/collection/contentequals/3.txt
-false,/tests/algorithm/collection/contentequals/2.txt,tests/algorithm/collection/contentequals/3.txt

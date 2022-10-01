@@ -18,6 +18,9 @@ import java.util.List;
 public class FilesImpl implements Files {
    @Override
    public boolean contentEquals(File file1, File file2) throws IOException {
+      if (file1 == null || file2 == null) {
+         throw new NullPointerException();
+      }
       if (!file1.isFile() || !file2.isFile()) {
          throw new IllegalArgumentException();
       }
@@ -26,12 +29,13 @@ public class FilesImpl implements Files {
 
    @Override
    public void copyDirectoryToDirectory(File sourceDir, File destinationDir) throws IOException {
-      if (sourceDir == null ||
-         destinationDir == null ||
-         !sourceDir.isDirectory() ||
-         !destinationDir.isDirectory())
-      {
-         throw new IllegalArgumentException();
+      if (sourceDir == null || destinationDir == null) {
+         throw new NullPointerException();
+      }
+      if (!sourceDir.isDirectory()) {
+         throw new NotDirectoryException(sourceDir.toString());
+      } else if (!destinationDir.isDirectory()) {
+         throw new NotDirectoryException(destinationDir.toString());
       }
       FileUtils.copyDirectoryToDirectory(sourceDir, destinationDir);
    }
@@ -60,10 +64,22 @@ public class FilesImpl implements Files {
       return FileUtils.readFileToByteArray(new File(url.toURI()));
    }
 
+
    @Override
    public String normalize(String fileName) {
       if (fileName == null) throw new NullPointerException();
-      return Paths.get(fileName).normalize().toString();
+      if (fileName.trim().equals("")) return "";
+
+      String apartFromParent = "/.*/\\.{2}$";
+      String SUFFIX = "/";
+      fileName = fileName.replaceAll(apartFromParent,SUFFIX);
+      String result = Paths.get(fileName).normalize().toString();
+      result = result.replaceFirst("~","");
+      return fileName.endsWith(SUFFIX) ? result+SUFFIX : result;
+   }
+
+   private static String getSuffix() {
+      return "/";
    }
 
    @Override

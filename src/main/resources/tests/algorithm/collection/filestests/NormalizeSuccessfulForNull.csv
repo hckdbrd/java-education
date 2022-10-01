@@ -1,0 +1,6 @@
+/../,null
+../foo,null
+foo/../../bar,null
+//server/../bar,null
+C:\..\bar,null
+~/../bar,null

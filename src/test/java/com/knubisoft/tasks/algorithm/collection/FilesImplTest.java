@@ -15,6 +15,8 @@ import java.nio.file.NotDirectoryException;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -35,10 +37,10 @@ public class FilesImplTest {
 
    @Test
    public void equalsContentTestFail() {
-      assertThrows(IllegalArgumentException.class, () -> instance.copyDirectoryToDirectory(null, null));
-      assertThrows(IllegalArgumentException.class, () -> instance.copyDirectoryToDirectory(emptyPath, null));
-      assertThrows(IllegalArgumentException.class, () -> instance.copyDirectoryToDirectory(null, emptyPath));
-      assertThrows(IllegalArgumentException.class, () -> instance.copyDirectoryToDirectory(emptyPath, emptyPath));
+      assertThrows(NullPointerException.class, () -> instance.contentEquals(null, null));
+      assertThrows(NullPointerException.class, () -> instance.contentEquals(emptyPath, null));
+      assertThrows(NullPointerException.class, () -> instance.contentEquals(null, emptyPath));
+      assertThrows(IllegalArgumentException.class, () -> instance.contentEquals(emptyPath, emptyPath));
    }
 
    @ParameterizedTest
@@ -54,10 +56,10 @@ public class FilesImplTest {
 
    @Test
    public void copyDirectoryToDirectoryTestFail() {
-      assertThrows(IllegalArgumentException.class, () -> instance.copyDirectoryToDirectory(null, null));
-      assertThrows(IllegalArgumentException.class, () -> instance.copyDirectoryToDirectory(emptyPath, null));
-      assertThrows(IllegalArgumentException.class, () -> instance.copyDirectoryToDirectory(null, emptyPath));
-      assertThrows(IllegalArgumentException.class, () -> instance.copyDirectoryToDirectory(emptyPath, emptyPath));
+      assertThrows(NullPointerException.class, () -> instance.copyDirectoryToDirectory(null, null));
+      assertThrows(NullPointerException.class, () -> instance.copyDirectoryToDirectory(emptyPath, null));
+      assertThrows(NullPointerException.class, () -> instance.copyDirectoryToDirectory(null, emptyPath));
+      assertThrows(NotDirectoryException.class, () -> instance.copyDirectoryToDirectory(emptyPath, emptyPath));
    }
 
    @ParameterizedTest
@@ -66,8 +68,8 @@ public class FilesImplTest {
    public void copyDirectoryToDirectoryIntegrityTestSuccessful(String expected) {
 
       // 1) fetch input
-      Path sourcePath = Path.of("/tests/algorithm/collection/copydirectory/source");
-      Path destinationPath = Path.of("/tests/algorithm/collection/copydirectory/destination");
+      Path sourcePath = Path.of("src/main/resources/tests/algorithm/collection/copydirectory/source");
+      Path destinationPath = Path.of("src/main/resources//tests/algorithm/collection/copydirectory/destination");
       File sourceDir = sourcePath.toFile();
       File destinationDir = destinationPath.toFile();
 
@@ -122,12 +124,19 @@ public class FilesImplTest {
          "Expected to get: '" + expected + "', but actual is: '" + actual + "'.");
    }
 
+   @ParameterizedTest
+   @CsvFileSource(resources = "/tests/algorithm/collection/NormalizeSuccessfulForNull.csv", numLinesToSkip = 1)
+   public void normalizeSuccessfulForNull(String input) {
+      String actual = instance.normalize(input);
+      assertNull(actual, "Expected to get: '" + null + "', but actual is: '" + actual + "'.");
+   }
+
    @Test
    public void readLinesFail() {
       assertThrows(NullPointerException.class, () -> instance.readLines(null, null));
       assertThrows(IOException.class, () -> instance.readLines(emptyPath, Charset.defaultCharset()));
       assertThrows(FileNotFoundException.class,
-         () -> instance.readLines(Path.of("/tests/algorithm/collection/isemptydirectory/empty1").toFile(),Charset.defaultCharset()));
+         () -> instance.readLines(Path.of("/tests/algorithm/collection/isemptydirectory/empty1").toFile(), Charset.defaultCharset()));
    }
 
    @ParameterizedTest

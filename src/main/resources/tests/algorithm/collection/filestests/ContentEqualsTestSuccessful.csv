@@ -1,0 +1,4 @@
+expected, filePath1, filePath2
+true,src/main/resources/tests/algorithm/collection/contentequals/1.txt,src/main/resources/tests/algorithm/collection/contentequals/2.txt
+false,src/main/resources/tests/algorithm/collection/contentequals/1.txt,src/main/resources/tests/algorithm/collection/contentequals/3.txt
+false,src/main/resources/tests/algorithm/collection/contentequals/2.txt,src/main/resources/tests/algorithm/collection/contentequals/3.txt

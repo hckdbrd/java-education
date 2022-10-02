@@ -44,15 +44,15 @@ public class FilesImpl implements Files {
    @Override
    public String toString(URL url, Charset encoding) throws IOException {
       if (url == null) {
-         throw new IllegalArgumentException();
+         throw new NullPointerException();
       }
-      return FileUtils.readFileToString(new File(url.toURI()), encoding);
+      return IOUtils.toString(url, encoding);
    }
 
    @Override
    public String toString(InputStream input, Charset charset) throws IOException {
       if (input == null) {
-         throw new IllegalArgumentException();
+         throw new NullPointerException();
       }
       return IOUtils.toString(input, charset);
    }
@@ -61,7 +61,7 @@ public class FilesImpl implements Files {
    @Override
    public byte[] toByteArray(URL url) throws IOException {
       if (url == null) throw new NullPointerException();
-      return FileUtils.readFileToByteArray(new File(url.toURI()));
+      return IOUtils.toByteArray(url);
    }
 
 
@@ -76,10 +76,6 @@ public class FilesImpl implements Files {
       String result = Paths.get(fileName).normalize().toString();
       result = result.replaceFirst("~","");
       return fileName.endsWith(SUFFIX) ? result+SUFFIX : result;
-   }
-
-   private static String getSuffix() {
-      return "/";
    }
 
    @Override

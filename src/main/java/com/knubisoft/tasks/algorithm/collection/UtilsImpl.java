@@ -64,6 +64,7 @@ public class UtilsImpl implements Utils {
 
    @Override
    public <E> Comparator<E> chainedComparator(Comparator<E>... comparators) {
+      if (comparators == null) throw new NullPointerException();
       return null;
    }
 

@@ -2,10 +2,10 @@ package com.knubisoft.tasks.algorithm.collection;
 
 import org.junit.jupiter.api.Test;
 
-import java.nio.channels.InterruptibleChannel;
-import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -97,12 +97,13 @@ public class UtilsImplTest {
 
    @Test
    public void synchronizedMapFail() {
-
+      assertThrows(NullPointerException.class, () -> instance.synchronizedMap(Map.of()));
    }
 
    @Test
    public void synchronizedMapSuccessful() {
-
+      assertEquals("{1=one, 2=two}", instance.synchronizedMap(Map.of(1, "one", 2, "two")).toString());
+      assertEquals("{1=one}", instance.synchronizedMap(Map.of(1, "one")).toString());
    }
 
    @Test
@@ -143,7 +144,7 @@ public class UtilsImplTest {
 
    @Test
    public void chainedComparatorFail() {
-
+      assertThrows(NullPointerException.class, () -> instance.chainedComparator( null));
    }
 
    @Test

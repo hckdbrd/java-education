@@ -2,13 +2,12 @@ package com.knubisoft.tasks.algorithm.collection;
 
 import lombok.SneakyThrows;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.NotDirectoryException;
@@ -44,7 +43,7 @@ public class FilesImplTest {
    }
 
    @ParameterizedTest
-   @CsvFileSource(resources = "/tests/algorithm/collection/ContentEqualsTestSuccessful.csv", numLinesToSkip = 1)
+   @CsvFileSource(resources = "/tests/algorithm/collection/filestests/ContentEqualsTestSuccessful.csv", numLinesToSkip = 1)
    @SneakyThrows
    public void contentEqualsTestSuccessful(String expected, String filePath1, String filePath2) {
       File file1 = Path.of(filePath1).toFile();
@@ -63,7 +62,7 @@ public class FilesImplTest {
    }
 
    @ParameterizedTest
-   @CsvFileSource(resources = "/tests/algorithm/collection/CopyDirectoryToDirectoryIntegrityTestSuccessful.csv", numLinesToSkip = 1)
+   @CsvFileSource(resources = "/tests/algorithm/collection/filestests/CopyDirectoryToDirectoryIntegrityTestSuccessful.csv", numLinesToSkip = 1)
    @SneakyThrows
    public void copyDirectoryToDirectoryIntegrityTestSuccessful(String expected) {
 
@@ -97,8 +96,12 @@ public class FilesImplTest {
    }
 
    @Test
+   @SneakyThrows
    public void toStingSuccessful() {
+      URL url = new URL("https://www.google.com");
+      Charset charset = Charset.defaultCharset();
 
+      assertNotNull(instance.toString(url, charset));
    }
 
    @Test
@@ -107,8 +110,15 @@ public class FilesImplTest {
    }
 
    @Test
+   @SneakyThrows
    public void toByteArraySuccessful() {
+      URL url = new URL("https://www.google.com/");
 
+      byte[] expected = IOUtils.toByteArray(url);
+      byte[] actual = instance.toByteArray(url);
+
+      assertEquals(expected, actual,
+         "Expected is : " + expected + " but was: " + actual + ".");
    }
 
    @Test
@@ -117,7 +127,7 @@ public class FilesImplTest {
    }
 
    @ParameterizedTest
-   @CsvFileSource(resources = "/tests/algorithm/collection/NormalizeSuccessful.csv", numLinesToSkip = 1)
+   @CsvFileSource(resources = "/tests/algorithm/collection/filestests/NormalizeSuccessful.csv", numLinesToSkip = 1)
    public void normalizeSuccessful(String input, String expected) {
       String actual = instance.normalize(input);
       assertEquals(expected, actual,
@@ -125,7 +135,7 @@ public class FilesImplTest {
    }
 
    @ParameterizedTest
-   @CsvFileSource(resources = "/tests/algorithm/collection/NormalizeSuccessfulForNull.csv", numLinesToSkip = 1)
+   @CsvFileSource(resources = "/tests/algorithm/collection/filestests/NormalizeSuccessfulForNull.csv", numLinesToSkip = 1)
    public void normalizeSuccessfulForNull(String input) {
       String actual = instance.normalize(input);
       assertNull(actual, "Expected to get: '" + null + "', but actual is: '" + actual + "'.");
@@ -136,14 +146,14 @@ public class FilesImplTest {
       assertThrows(NullPointerException.class, () -> instance.readLines(null, null));
       assertThrows(IOException.class, () -> instance.readLines(emptyPath, Charset.defaultCharset()));
       assertThrows(FileNotFoundException.class,
-         () -> instance.readLines(Path.of("/tests/algorithm/collection/isemptydirectory/empty1").toFile(), Charset.defaultCharset()));
+         () -> instance.readLines(Path.of("/tests/algorithm/collection/filestests/isemptydirectory/empty1").toFile(), Charset.defaultCharset()));
    }
 
    @ParameterizedTest
    @CsvFileSource(resources = "/tests/algorithm/collection/ReadLinesSuccessful.csv", numLinesToSkip = 1)
    @SneakyThrows
    public void readLinesSuccessful(String filePath, String expected) {
-      File file = Path.of("src/main/resources/tests/algorithm/collection/readlines/lines.txt").toFile();
+      File file = Path.of("src/main/resources/tests/algorithm/collection/filestests/readlines/lines.txt").toFile();
       List<String> expectedList = Stream.of(expected.split("\\|")).toList();
       assertEquals(expectedList, instance.readLines(file, Charset.defaultCharset()));
    }
@@ -152,11 +162,11 @@ public class FilesImplTest {
    public void isEmptyDirectoryFail() {
       assertThrows(NullPointerException.class, () -> instance.isEmptyDirectory(null));
       assertThrows(NotDirectoryException.class,
-         () -> instance.isEmptyDirectory(Path.of("tests/algorithm/collection/isemptydirectory/notempty/some.txt").toFile()));
+         () -> instance.isEmptyDirectory(Path.of("tests/algorithm/collection/filestests/isemptydirectory/notempty/some.txt").toFile()));
    }
 
    @ParameterizedTest
-   @CsvFileSource(resources = "/tests/algorithm/collection/IsEmptyDirectorySuccessful.csv", numLinesToSkip = 1)
+   @CsvFileSource(resources = "/tests/algorithm/collection/filestests/IsEmptyDirectorySuccessful.csv", numLinesToSkip = 1)
    @SneakyThrows
    public void isEmptyDirectorySuccessful(String expected, String directoryPath) {
       boolean isEmpty = Boolean.parseBoolean(expected);

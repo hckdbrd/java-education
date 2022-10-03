@@ -113,11 +113,12 @@ public class FilesImplTest {
    @SneakyThrows
    public void toByteArraySuccessful() {
       URL url = new URL("https://www.google.com/");
+      URL local_url = new URL("http://localhost:8080");
 
       byte[] expected = IOUtils.toByteArray(url);
       byte[] actual = instance.toByteArray(url);
 
-      assertEquals(expected, actual,
+      assertArrayEquals(expected, actual,
          "Expected is : " + expected + " but was: " + actual + ".");
    }
 

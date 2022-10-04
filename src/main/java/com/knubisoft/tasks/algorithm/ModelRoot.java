@@ -1,12 +1,9 @@
 package com.knubisoft.tasks.algorithm;
 
-import java.util.List;
+import lombok.Data;
 
-/**
- * TODO fix model
- *
- * @see json and xml file
- */
+import java.util.List;
+@Data
 public class ModelRoot {
 
     public List<Item> items;
@@ -16,6 +13,7 @@ public class ModelRoot {
         public String type;
     }
 
+    @Data
     public static class Item {
         public int id;
         public String type;

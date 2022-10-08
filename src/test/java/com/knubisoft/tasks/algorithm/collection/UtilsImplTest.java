@@ -1,8 +1,5 @@
 package com.knubisoft.tasks.algorithm.collection;
-
 import org.junit.jupiter.api.Test;
-
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -145,11 +142,6 @@ public class UtilsImplTest {
    @Test
    public void chainedComparatorFail() {
       assertThrows(NullPointerException.class, () -> instance.chainedComparator( null));
-   }
-
-   @Test
-   public void chainedComparatorSuccessful() {
-
    }
 
    @Test

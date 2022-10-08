@@ -1,11 +1,10 @@
 package com.knubisoft.tasks.algorithm.collection;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.ComparatorUtils;
+import org.apache.commons.collections4.MapUtils;
 
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -43,7 +42,22 @@ public class UtilsImpl implements Utils {
 
    @Override
    public <K, V> Map<K, V> synchronizedMap(Map<K, V> map) {
-      return null;
+      if (map.isEmpty()) {
+         throw new NullPointerException();
+      }
+
+      Map<K, V> synchronizedMap = MapUtils.synchronizedMap(map);
+      Set<K> s = synchronizedMap.keySet();
+
+      Map<K, V> result = new HashMap<>();
+
+      synchronized (synchronizedMap) {
+         for (K k : s) {
+            result.put(k, synchronizedMap.get(k));
+         }
+      }
+
+      return result;
    }
 
    @Override
@@ -64,8 +78,10 @@ public class UtilsImpl implements Utils {
 
    @Override
    public <E> Comparator<E> chainedComparator(Comparator<E>... comparators) {
-      if (comparators == null) throw new NullPointerException();
-      return null;
+      if (comparators == null) {
+         throw new IllegalArgumentException();
+      }
+      return ComparatorUtils.chainedComparator(comparators);
    }
 
    @Override

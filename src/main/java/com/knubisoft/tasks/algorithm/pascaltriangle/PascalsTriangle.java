@@ -1,5 +1,6 @@
 package com.knubisoft.tasks.algorithm.pascaltriangle;
 
+import java.math.BigInteger;
 import java.util.List;
 
 public interface PascalsTriangle {
@@ -19,6 +20,5 @@ public interface PascalsTriangle {
      *
      *  @return correct list with number for such line
      */
-    List<Integer> calculateLineOfPascalsTriangle(int lineNumber);
-
+    List<BigInteger> calculateLineOfPascalTriangle(int lineNumber);
 }
